@@ -4,9 +4,12 @@
   "description": "Udacity Img Processing API Application",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint src/index.ts",
+    "prettier": "prettier --config .prettierrc '*.js' --write",
     "build": "npx tsc",
     "jasmine": "jasmine",
-    "start": "nodemon src/index.ts"
+    "start": "nodemon src/index.ts",
+    "test": "npm run build && npm run jasmine"
   },
   "keywords": [
     "udacity",
@@ -18,13 +21,23 @@
     "@types/express": "^4.17.13",
     "@types/jasmine": "^4.0.3",
     "@types/node": "^17.0.25",
+    "@types/sharp": "^0.30.2",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
+    "eslint": "^8.13.0",
+    "eslint-config-prettier": "^8.5.0",
     "nodemon": "^2.0.15",
+    "prettier": "^1.19.1",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
   },
   "dependencies": {
     "express": "^4.17.3",
     "jasmine": "^4.1.0",
-    "jasmine-spec-reporter": "^7.0.0"
+    "jasmine-spec-reporter": "^7.0.0",
+    "node-cache": "^5.1.2",
+    "sharp": "^0.30.4",
+    "supertest": "^6.2.2"
   }
 }
