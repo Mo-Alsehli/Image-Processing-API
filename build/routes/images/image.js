@@ -42,17 +42,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var sharp_1 = __importDefault(require("sharp"));
 var path_1 = __importDefault(require("path"));
+//import { promises as fs } from "fs";
+var fs_1 = require("fs");
 var image = express_1.default.Router();
 var imgQuery = { name: "", width: "", height: "" };
-image.get("/", function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+image.get("/", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    function checkFileExists() {
+        return new Promise(function () {
+            fs_1.promises.access(pathUrl);
+        });
+    }
+    var pathUrl;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 imgQuery.name = req.query.filename;
                 imgQuery.width = req.query.width;
                 imgQuery.height = req.query.height;
+                pathUrl = new URL("process.cwd(),\n  assets/thumbs/".concat(imgQuery.name, "_").concat(imgQuery.width, "_").concat(imgQuery.height, ".png"));
+                console.log(checkFileExists());
                 if (!(req.originalUrl === "/api/image" || req.originalUrl === "/api/image/")) return [3 /*break*/, 1];
-                res.send("Imgae");
+                res.send("IMAGE API");
                 return [3 /*break*/, 3];
             case 1: 
             /* fs.appendFile(
