@@ -39,40 +39,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = __importDefault(require("express"));
+exports.resize = void 0;
+var sharp_1 = __importDefault(require("sharp"));
 var path_1 = __importDefault(require("path"));
-var cache_1 = require("./functions/cache");
-var resize_1 = require("./functions/resize");
-var checkFilename_1 = require("./functions/checkFilename");
-var image = express_1.default.Router();
-var imgQuery = { name: "", width: "", height: "" };
-image.get("/", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var resized, filename;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                imgQuery.name = req.query.filename;
-                imgQuery.width = req.query.width;
-                imgQuery.height = req.query.height;
-                if (!(req.originalUrl === "/api/image" || req.originalUrl === "/api/image/")) return [3 /*break*/, 1];
-                return [2 /*return*/, res.send("IMAGE API")];
-            case 1: return [4 /*yield*/, (0, cache_1.checkFileExists)("assets/thumbs/".concat(imgQuery.name, "_").concat(imgQuery.width, "_").concat(imgQuery.height, ".png"))];
-            case 2:
-                if (!_a.sent()) return [3 /*break*/, 3];
-                return [2 /*return*/, res.sendFile(path_1.default.join(process.cwd(), "assets/thumbs/".concat(imgQuery.name, "_").concat(imgQuery.width, "_").concat(imgQuery.height, ".png")))];
-            case 3: return [4 /*yield*/, (0, checkFilename_1.checkFilename)(imgQuery.name)];
-            case 4:
-                if (_a.sent()) {
-                    return [2 /*return*/, res.send("This Image Name Doesn't Exist!")];
-                }
-                else {
-                    resized = path_1.default.join(process.cwd(), "assets/".concat(imgQuery.name, ".jpg"));
-                    filename = "assets/thumbs/".concat(imgQuery.name, "_").concat(imgQuery.width, "_").concat(imgQuery.height, ".png");
-                    (0, resize_1.resize)(resized, filename, imgQuery.width, imgQuery.height, res);
-                }
-                _a.label = 5;
-            case 5: return [2 /*return*/];
-        }
+function resize(resized, filename, width, height, res) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, (0, sharp_1.default)(resized)
+                        .resize(parseInt(width), parseInt(height))
+                        .toFile(filename)];
+                case 1:
+                    _a.sent();
+                    console.log(res.sendFile(path_1.default.join(process.cwd(), filename)));
+                    return [2 /*return*/, res.sendFile(path_1.default.join(process.cwd(), filename))];
+            }
+        });
     });
-}); });
-exports.default = image;
+}
+exports.resize = resize;

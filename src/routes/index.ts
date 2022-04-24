@@ -3,8 +3,8 @@ import image from "./images/image";
 
 const routes = express.Router();
 
-routes.get("/", (req, res) => {
-  res.send("api");
+routes.get("/", (req: express.Request, res: express.Response) => {
+  return res.send("api");
 });
 
 routes.use("/image", image);
