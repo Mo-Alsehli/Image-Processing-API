@@ -12,6 +12,7 @@ image.get("/", async (req: express.Request, res: express.Response) => {
   imgQuery.name = req.query.filename as string;
   imgQuery.width = req.query.width as string;
   imgQuery.height = req.query.height as string;
+
   if (req.originalUrl === "/api/image" || req.originalUrl === "/api/image/") {
     return res.send("IMAGE API");
   } else if (
@@ -30,7 +31,14 @@ image.get("/", async (req: express.Request, res: express.Response) => {
   } else {
     const resized = path.join(process.cwd(), `assets/${imgQuery.name}.jpg`);
     const filename = `assets/thumbs/${imgQuery.name}_${imgQuery.width}_${imgQuery.height}.png`;
-    resize(resized, filename, imgQuery.width, imgQuery.height, res);
+    await resize(
+      resized,
+      filename,
+      parseInt(imgQuery.width),
+      parseInt(imgQuery.height)
+    );
+
+    return res.sendFile(path.join(process.cwd(), filename));
   }
 });
 

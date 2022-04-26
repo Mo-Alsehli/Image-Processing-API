@@ -41,18 +41,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resize = void 0;
 var sharp_1 = __importDefault(require("sharp"));
-var path_1 = __importDefault(require("path"));
-function resize(resized, filename, width, height, res) {
+function resize(resized, filename, width, height) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, (0, sharp_1.default)(resized)
-                        .resize(parseInt(width), parseInt(height))
+                        .resize(width, height)
                         .toFile(filename)];
-                case 1:
-                    _a.sent();
-                    console.log(res.sendFile(path_1.default.join(process.cwd(), filename)));
-                    return [2 /*return*/, res.sendFile(path_1.default.join(process.cwd(), filename))];
+                case 1: return [2 /*return*/, _a.sent()];
             }
         });
     });

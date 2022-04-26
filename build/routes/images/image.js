@@ -62,16 +62,15 @@ image.get("/", function (req, res) { return __awaiter(void 0, void 0, void 0, fu
                 return [2 /*return*/, res.sendFile(path_1.default.join(process.cwd(), "assets/thumbs/".concat(imgQuery.name, "_").concat(imgQuery.width, "_").concat(imgQuery.height, ".png")))];
             case 3: return [4 /*yield*/, (0, checkFilename_1.checkFilename)(imgQuery.name)];
             case 4:
-                if (_a.sent()) {
-                    return [2 /*return*/, res.send("This Image Name Doesn't Exist!")];
-                }
-                else {
-                    resized = path_1.default.join(process.cwd(), "assets/".concat(imgQuery.name, ".jpg"));
-                    filename = "assets/thumbs/".concat(imgQuery.name, "_").concat(imgQuery.width, "_").concat(imgQuery.height, ".png");
-                    (0, resize_1.resize)(resized, filename, imgQuery.width, imgQuery.height, res);
-                }
-                _a.label = 5;
-            case 5: return [2 /*return*/];
+                if (!_a.sent()) return [3 /*break*/, 5];
+                return [2 /*return*/, res.send("This Image Name Doesn't Exist!")];
+            case 5:
+                resized = path_1.default.join(process.cwd(), "assets/".concat(imgQuery.name, ".jpg"));
+                filename = "assets/thumbs/".concat(imgQuery.name, "_").concat(imgQuery.width, "_").concat(imgQuery.height, ".png");
+                return [4 /*yield*/, (0, resize_1.resize)(resized, filename, parseInt(imgQuery.width), parseInt(imgQuery.height))];
+            case 6:
+                _a.sent();
+                return [2 /*return*/, res.sendFile(path_1.default.join(process.cwd(), filename))];
         }
     });
 }); });

@@ -4,7 +4,7 @@
   "description": "Udacity Img Processing API Application",
   "main": "index.js",
   "scripts": {
-    "prettier": "prettier --config .prettierrc '*.ts' --write",
+    "prettier": "eslint . --ext .ts --fix",
     "lint": "eslint . --ext .ts",
     "build": "npx tsc",
     "jasmine": "jasmine",
@@ -27,10 +27,10 @@
     "@typescript-eslint/parser": "^5.20.0",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
+    "jasmine-spec-reporter": "^7.0.0",
     "nodemon": "^2.0.15",
     "prettier": "^1.19.1",
     "ts-node": "^10.7.0",
-    "jasmine-spec-reporter": "^7.0.0",
     "typescript": "^4.6.3"
   },
   "dependencies": {
